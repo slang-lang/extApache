@@ -3,6 +3,7 @@
 #include "Extension.h"
 
 // Library includes
+#include <cassert>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -163,6 +164,8 @@ void Extension::initialize( Slang::Extensions::ExtensionNamespace* /*scope*/ )
 
 void Extension::provideMethods( Slang::Extensions::ExtensionMethods& methods )
 {
+	assert( methods.empty() );
+
 	methods.push_back( new Get() );
 	methods.push_back( new IsSet() );
 	methods.push_back( new Post() );

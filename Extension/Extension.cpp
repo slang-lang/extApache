@@ -30,18 +30,6 @@ Extension::Extension()
 
 void Extension::initialize( Slang::Extensions::ExtensionNamespace* /*scope*/ )
 {
-	/*
-	char* request = getenv( REQUEST_METHOD );
-	if ( request == nullptr ) {
-		return;
-	}
-
-	readGetData();
-
-	if ( strcmp( request, "POST" ) == 0 ) {
-		readPostData();
-	}
-	*/
 }
 
 void Extension::provideMethods( Slang::Extensions::ExtensionMethods& methods )

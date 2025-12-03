@@ -39,6 +39,9 @@ public:
 
 		auto param_name = (*it++).value().toStdString();
 
+		readGetData();
+		readPostData();
+
 		bool result_value = false;
 		if ( mGetQueryString.find(param_name) != mGetQueryString.end() ) {
 			result_value = true;

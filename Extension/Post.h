@@ -39,6 +39,8 @@ public:
 
 		auto param_name = (*it++).value().toStdString();
 
+		readPostData();
+
 		std::string result_value;
 
 		auto postIt = mPostQueryString.find(param_name);

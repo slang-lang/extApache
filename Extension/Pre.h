@@ -44,7 +44,7 @@ public:
 		size_t start = 0;
 
 		while ( (start = param_text.find_first_of(APACHEEXT_VARPREFIX, start)) != std::string::npos ) {
-			size_t end = param_text.find_first_of(APACHEEXT_VARPREFIX, start + 1);
+			auto end = param_text.find_first_of(APACHEEXT_VARPREFIX, start + 1);
 
 			if ( end == std::string::npos ) {
 				break;

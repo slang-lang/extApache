@@ -25,10 +25,6 @@ public:
 
 	void initialize( Slang::Extensions::ExtensionNamespace* scope );
 	void provideMethods( Slang::Extensions::ExtensionMethods& methods );
-
-private:
-	void readGetData();
-	void readPostData();
 };
 
 

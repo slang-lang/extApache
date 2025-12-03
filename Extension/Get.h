@@ -38,6 +38,8 @@ public:
 
 		auto param_name = (*it++).value().toStdString();
 
+		readGetData();
+
 		std::string result_value;
 
 		auto getIt = mGetQueryString.find(param_name);

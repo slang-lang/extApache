@@ -24,7 +24,7 @@ namespace Apache {
 
 
 Extension::Extension()
-: AExtension( "extApache", "0.4.0" )
+: AExtension( "extApache", "0.4.1" )
 {
 }
 

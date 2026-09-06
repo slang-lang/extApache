@@ -131,7 +131,7 @@ void readPostData()
 	free( postdata );
 }
 
-
+/*
 std::string UriDecode(const std::string & sSrc)
 {
 	// Note from RFC1630:  "Sequences which start with a percent sign
@@ -168,7 +168,42 @@ std::string UriDecode(const std::string & sSrc)
 	delete [] pStart;
 	return sResult;
 }
+*/
 
+std::string UriDecode(const std::string& src)
+{
+    std::string result;
+    result.reserve(src.size());
+
+    for (size_t i = 0; i < src.size(); ++i) {
+        if (src[i] == '+') {
+            result += ' ';
+        }
+        else if (src[i] == '%' && i + 2 < src.size()) {
+            const int dec1 = HEX2DEC[
+                static_cast<unsigned char>(src[i + 1])
+            ];
+            const int dec2 = HEX2DEC[
+                static_cast<unsigned char>(src[i + 2])
+            ];
+
+            if (dec1 != -1 && dec2 != -1) {
+                result += static_cast<char>((dec1 << 4) | dec2);
+                i += 2;
+            }
+            else {
+                result += src[i];
+            }
+        }
+        else {
+            result += src[i];
+        }
+    }
+
+    return result;
+}
+
+/*
 std::string UriEncode(const std::string & sSrc)
 {
 	const char DEC2HEX[16 + 1] = "0123456789ABCDEF";
@@ -193,6 +228,42 @@ std::string UriEncode(const std::string & sSrc)
 	std::string sResult((char *)pStart, (char *)pEnd);
 	delete [] pStart;
 	return sResult;
+}
+*/
+
+std::string UriEncode(const std::string& src)
+{
+    static constexpr char HEX[] = "0123456789ABCDEF";
+
+    std::string result;
+    result.reserve(src.size() * 3);
+
+    for (unsigned char c : src) {
+        // application/x-www-form-urlencoded:
+        // spaces are represented as '+'
+        if (c == ' ') {
+            result += '+';
+        }
+        // RFC 3986 unreserved characters
+        else if (
+            (c >= 'A' && c <= 'Z') ||
+            (c >= 'a' && c <= 'z') ||
+            (c >= '0' && c <= '9') ||
+            c == '-' ||
+            c == '_' ||
+            c == '.' ||
+            c == '~'
+        ) {
+            result += static_cast<char>(c);
+        }
+        else {
+            result += '%';
+            result += HEX[(c >> 4) & 0x0F];
+            result += HEX[c & 0x0F];
+        }
+    }
+
+    return result;
 }
 
 
